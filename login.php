@@ -1,6 +1,13 @@
 <?php
 	require_once("functions.php");
-
+	
+	//kui kasutaja on sisse logitud, suuna teisele lehele
+	//kontrollin kas sessiooni muutuja on olemas
+	var_dump($_SESSION);
+	if(isset($_SESSION['logged_in_user_id'])){
+		header("Location: data.php");
+	}
+	
 
   // muuutujad errorite jaoks
 	$email_error = "";
@@ -37,7 +44,7 @@
 
       // Kui oleme siia jõudnud, võime kasutaja sisse logida
 			if($password_error == "" && $email_error == ""){
-				echo "Võib sisse logida! Kasutajanimi on ".$email." ja parool on ".$password;
+				//echo "Võib sisse logida! Kasutajanimi on ".$email." ja parool on ".$password;
 			
                 $hash = hash("sha512", $password);
                 
@@ -71,8 +78,8 @@
 			}
 
 			if(	$create_email_error == "" && $create_password_error == ""){
-				echo hash("sha512", $create_password);
-                echo "Võib kasutajat luua! Kasutajanimi on ".$create_email." ja parool on ".$create_password;
+				//echo hash("sha512", $create_password);
+                //echo "Võib kasutajat luua! Kasutajanimi on ".$create_email." ja parool on ".$create_password;
                 
                 // tekitan parooliräsi
                 $hash = hash("sha512", $create_password);
